@@ -97,3 +97,141 @@ us to search data with sophisticated patterns much more efficiently
 | **R∪S** | ```SELECT column(s) FROM R UNION SELECT column(s) FROM S;``` |
 
 
+## Working On A DataBase
+
+
+## Login
+
+```bash
+mysql -u root -p
+```
+
+## Show Users
+
+```sql
+SELECT User, Host FROM mysql.user;
+```
+
+## Create User
+
+```sql
+CREATE USER 'someuser'@'localhost' IDENTIFIED BY 'somepassword';
+```
+
+## Grant All Priveleges On All Databases
+
+```sql
+GRANT ALL PRIVILEGES ON * . * TO 'someuser'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+## Show Grants
+
+```sql
+SHOW GRANTS FOR 'someuser'@'localhost';
+```
+
+## Remove Grants
+
+```sql
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'someuser'@'localhost';
+```
+
+## Delete User
+
+```sql
+DROP USER 'someuser'@'localhost';
+```
+
+## Exit
+
+```sql
+exit;
+```
+
+## Show Databases
+
+```sql
+SHOW DATABASES
+```
+
+## Create Database
+
+```sql
+CREATE DATABASE test_database;
+```
+
+## Delete Database
+
+```sql
+DROP DATABASE test_database;
+```
+
+## Select Database
+
+```sql
+USE test_database;
+```
+
+#### Table
+
+In the below example, data passed to the id column must be an int, whilst the first_name column
+has a VARCHAR data type with a maximum of 255 characters.
+
+```sql
+CREATE TABLE users (
+	id int,
+	first_name varchar(255)
+);
+```
+
+Check if not exist and create
+
+```sql
+IF object_id('tbl_customer', n'U') IS NOT NULL DROP TABLE tbl_customer;
+GO 
+CREATE TABLE tbl_customer ( id_customer INT NOT NULL PRIMARY key, fi_moral_nr INT, name VARCHAR(25) NOT NULL, vorname VARCHAR NOT NULL, wohnort VARCHAR );
+GO
+```
+
+#### Alter Table
+`Adds, deletes or edits columns in a table`. It can also be used to add and
+delete constraints in a table, as per the above.
+Example: Adds a new boolean column called ‘approved’ to a table named
+‘deals’.
+
+```sql
+ALTER TABLE deals
+ADD approved boolean;
+```
+Example 2: Deletes the ‘approved’ column from the ‘deals’ table
+```sql
+ALTER TABLE deals
+DROP COLUMN approved;
+```
+#### Primary Key
+Alter an existing table and set the primary key to the first_name column.
+```sql
+ALTER TABLE stud
+ADD PRIMARY KEY (first_name);
+```
+
+#### Alter Column
+Changes the data type of a table’s column.
+Example: In the ‘users’ table, make the column ‘incept_date’ into a
+‘datetime’ type.
+
+```sql
+ALTER TABLE users
+ALTER COLUMN incept_date datetime;
+```
+
+#### Drop Column
+Deletes a column from a table.
+Example: Removes the first_name column from the users table.
+
+```sql
+ALTER TABLE users
+DROP COLUMN first_name
+```
+
